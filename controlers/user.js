@@ -1,13 +1,14 @@
-const User = require("../models/user").User
-const Orser = require("../models/order").Orser
+const {User} = require("../models/user.model");
+const {Order} = require("../models/order")
+
 module.exports.addUser = async (req, res) => {
-    let newUser = req.boody;
+  
+    let newUser = req.body;
     let addnewUser = new User(newUser)
     try {
         await addnewUser.save();
         console.log(addnewUser);
         return res.send(addnewUser);
-
     }
     catch (error) {
         console.log(error);
@@ -15,9 +16,8 @@ module.exports.addUser = async (req, res) => {
     }
 }
 module.exports.getAllOrdersByUserId = async (req, res) => {
-    let MyIdUser = req.params.idUser
-    //if(a=="")
-    // a="there aren't orders";
+
+    let MyIdUser = req.query.id
     try {
         let allOrders = await User.findById(MyIdUser)
         //אפשר פה לעשות בשורה למעה .arrOrders
@@ -31,17 +31,20 @@ module.exports.getAllOrdersByUserId = async (req, res) => {
         return res.status(400).send(e)
     }
 }
+
 module.exports.addOrdertoUser = async (req, res) => {
-    let newOrder = req.boody;
+    console.log(req)
+    let newOrder = req.body;
+    console.log(`!!!!!!!!!!!!!!!!!!!!!!!!!!!${req.body}`) 
     let MyUser = await User.findOne({ "idUser": newOrder.idUser })
     if (MyUser) {
         MyUser.arrOrders.push(newOrder.arrOrders);
         console.log("good, old user")
+        return res.send(MyUser)
     }
     else {
         console.log("new user!!!")
         this.addUser(newOrder);
 
     }
-
 }
