@@ -33,6 +33,7 @@ module.exports.getAllProducts = async (req, res) => {
     let products = await Products.find({});
     return res.send(products)
 }
+
 module.exports.getProductById = async (req, res) => {
     let id = req.params.id;
     let products = await Products.find({ "product.id": id })
