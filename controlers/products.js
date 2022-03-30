@@ -25,6 +25,7 @@ module.exports.deleteProduct = async (req, res) => {
     }
     catch (err) {
         console.log(err)
+        return res.status(400).send(err);
     }
 }
 
@@ -35,5 +36,5 @@ module.exports.getAllProducts = async (req, res) => {
 module.exports.getProductById = async (req, res) => {
     let id = req.params.id;
     let products = await Products.find({ "product.id": id })
-    return res.send(roducts)
+    return res.send(products)
 }
