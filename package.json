@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "express": "^4.17.3",
-    "mongoose": "^6.2.9"
+    "mongoose": "^6.2.9",
+    "package-json": "7.0.0",
+    "create-react-app": "5.0.0"
   }
 }
